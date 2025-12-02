@@ -132,28 +132,7 @@ function check_pkgs() {
 
 # Set threads
 function setmt() {
-    while true; do
-        if [ "$#" -gt 0 ]; then
-            multi_threaded="$1"
-        else
-            echo -e "Note: ${BLUE}Multi threaded for fast download.\nUse 4-8 threaded for best. ${RED}Max threaded 16.${NC}"
-            echo -en "* ${CYAN}Multi-threaded: ${NC}"
-            read -r multi_threaded
-        fi
-            echo ""
-            if [[ -z "${multi_threaded}" ]]; then
-                multi_threaded=4
-                echo -e "\n${RED}No input. ${GREEN}Default is ${multi_threaded}.${NC}"
-                break
-            fi
-            if [[ "${multi_threaded}" =~ ^[0-9]+$ ]] && (( multi_threaded <= 16 )); then
-                break
-            else
-                echo -e "\n${RED}Invalid input. Enter a number from 1-16.${NC}"
-                sleep 2
-            fi
-        done
-        mt_args=("--downloader" "aria2c" "--downloader-args" "aria2c: -x \"${multi_threaded}\" -s \"${multi_threaded}\"")
+        mt_args=("--downloader" "aria2c" "--downloader-args" "aria2c: -x \"16\" -s \"16\"")
 }
     
     
